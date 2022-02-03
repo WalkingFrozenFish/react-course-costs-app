@@ -1,40 +1,33 @@
 import React, { useState } from 'react';
 import Card from '../Card/Card';
 import CostFilter from '../CostFilter/CostFilter';
-import CostItem from '../CostItem/CostItem';
 import CostsDiagram from '../CostsDiagram/CostsDiagram';
 import CostsList from '../CostsList/CostsList';
 import "./Costs.css";
 
 const Costs = (props) => {
+    // Объявляем состояние для выбора года, по которому будет идти фильтрация трат
     const [selectedYear, setSelectedYear] = useState("2019");
-    // const [filterArray, setFilterArray] = useState([...props.costs]);
 
+    // Коллбек функция для смены значения в состоянии selectedYear, которую мы передаем в компонент CostFilter
     const yearChangeHandler = (year) => {
         setSelectedYear(year);
-        // setFilterArray(props.costs.filter(item => new Date(item.date).getFullYear().toString() === year))
     }
 
+    // Фильтруем полученные данные из компонента App, получаем новый массив с данными где год траты из массива совпадает с годом в состоянии selectedYear
     const filteredCosts = props.costs.filter(cost => cost.date.getFullYear().toString() === selectedYear);
-
-
 
     return (
         <div>
             <Card className='costs'>
+                {/* Передаем коллбек функцию в компонент, через которую мы получаем год для фильтрации */}
                 <CostFilter year={selectedYear} onChangeYear={yearChangeHandler} />
-                {/* <CostItem date={props.costs[0].date} description={props.costs[0].description} amount={props.costs[0].amount} />
-                <CostItem date={props.costs[1].date} description={props.costs[1].description} amount={props.costs[1].amount} />
-                <CostItem date={props.costs[2].date} description={props.costs[2].description} amount={props.costs[2].amount} /> */}
-                <CostsDiagram costs={filteredCosts} />
-                <CostsList costs={filteredCosts} />
 
-                {/* {filterArray.map((item) => {
-                    return <CostItem key={item.id} date={item.date} description={item.description} amount={item.amount} />
-                })} */}
-                {/* {props.costs.map((item) => {
-                    return <CostItem key={item.id} date={item.date} description={item.description} amount={item.amount} />
-                })} */}
+                {/* Передаем отфильтрованный массив с данными в компонент */}
+                <CostsDiagram costs={filteredCosts} />
+
+                {/* Передаем отфильтрованный массив с данными в компонент */}
+                <CostsList costs={filteredCosts} />
             </Card>
         </div>
     );

@@ -3,10 +3,10 @@ import "./CostDate.css";
 
 const CostDate = (props) => {
 
+    // Форматируем полученные данные для удобочитаемости
     const month = props.date.toLocaleString("ru-RU", { month: "long" });
     const year = props.date.getFullYear();
     const day = props.date.toLocaleString("ru-RU", { day: "2-digit" });
-    // console.log(props)
 
     return (
         <div className='cost-date'>
