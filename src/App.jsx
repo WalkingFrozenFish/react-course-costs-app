@@ -55,7 +55,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Изучаем react</h1>
+      {/* <h1>Изучаем react</h1> */}
       <NewCost onAddCost={addCostHandler} />
       <Costs costs={costs} />
       {/* <CostItem date={costs[0].date} description={costs[0].description} amount={costs[0].amount} />
